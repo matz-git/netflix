@@ -17,42 +17,26 @@ export function BrowseContainer({ slides }) {
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
-//   useEffect(() => {
-//     setTimeout(() => {
-//       setLoading(false);
-//     }, 3000);
-//   }, [profile.displayName]);
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-        setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
     }, 3000);
-    return () => {
-      clearTimeout(timer);
-    }
   }, [profile.displayName]);
-
-
-
 
   useEffect(() => {
     setSlideRows(slides[category]);
   }, [slides, category]);
 
-    
+  useEffect(() => {
+    const fuse = new Fuse(slideRows, { keys: ['data.description', 'data.title', 'data.genre'] });
+    const results = fuse.search(searchTerm).map(({ item }) => item);
 
-  
-
-//   useEffect(() => {
-//     const fuse = new Fuse(slideRows, { keys: ['data.title', 'data.genre'] });
-//     const results = fuse.search(searchTerm).map(({ item }) => item);
-
-//     if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
-//       setSlideRows(results);
-//     } else {
-//       setSlideRows(slides[category]);
-//     }
-//   }, [searchTerm]);
+    if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+      setSlideRows(results);
+    } else {
+      setSlideRows(slides[category]);
+    }
+  }, [searchTerm]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return profile.displayName ? (
     <>

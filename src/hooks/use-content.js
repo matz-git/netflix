@@ -26,7 +26,7 @@ export default function useContent(target) {
         console.log(error.message);
       });
     return () => { isMounted = false };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { [target]: content };
 }
