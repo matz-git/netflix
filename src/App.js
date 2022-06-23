@@ -16,7 +16,6 @@ export default function App() {
     return (
         // <Router>
         //     <Routes>
-
         //         <Route path={ROUTES.HOME} element={<Home />} />
         //         <Route 
         //             path={ROUTES.SIGN_IN} 
@@ -34,7 +33,6 @@ export default function App() {
         //                 </RequireAuth>
         //             }
         //         />
-
         //     </Routes>
         // </Router>
 
